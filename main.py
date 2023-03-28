@@ -83,7 +83,9 @@ for _ in range(3):
        areas = area of the Real estate in square meters: integer
        links = website link of the of the Real estate"""
     bot.agree()
+    # need to wait until an add closes
+    time.sleep(8)
     bot.next_page()
-    bot.dont_close_window()
+
 
 bot.dont_close_window()
