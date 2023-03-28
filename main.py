@@ -3,6 +3,7 @@ from selenium.webdriver.chrome.service import Service
 import csv
 import time
 
+# Enter your chrome driver path here. Here is mine:
 chrome_driver_path = "C:\Development\chromedriver.exe"
 
 
@@ -27,7 +28,7 @@ class WebScraping(Service):
 
         # Takes data from the website
     def get_housing_data(self):
-        self.driver.get("https://m.aruodas.lt/butai/vilniuje/")
+        self.driver.get("https://m.xxxxxxx.lt/butai/vilniuje/")
         prices = self.driver.find_elements(by="class name", value="price-main")
         self.clear_prices = [int(price.text.replace("€", "").replace(" ", "")) for price in prices]
         prices_per = self.driver.find_elements(by="class name", value="price-per")
@@ -41,13 +42,12 @@ class WebScraping(Service):
                 self.clear_areas.append(float(description[9:12].replace(",", ".")))
         links = self.driver.find_elements(by="class name", value="result-item-info-container-big_thumbs")
         self.clear_links = [link.get_attribute('href') for link in links]
-        time.sleep(5)
 
         # Auto scrolls through pages to collect all the data
     def next_page(self):
         forward_button = self.driver.find_element(by="class name", value="icon-arrow-next-page")
         forward_button.click()
-        time.sleep(5)
+        time.sleep(3)
 
         # Does not close the browser after taking the data (optional)
     def dont_close_window(self):
